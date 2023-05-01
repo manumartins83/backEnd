@@ -1,0 +1,11 @@
+Service = (id_service VARCHAR(3), type_service VARCHAR(1), date_service DATE, num_table INT);
+Serveur = (id_employe VARCHAR(5), nom_serveur VARCHAR(50), prenom_serveur VARCHAR(50), rue_serveur VARCHAR(50), CP_serveur INT, ville_serveur VARCHAR(25), tel_serveur DECIMAL(10,0), certifs_serveur VARCHAR(50), #id_service);
+Carte = (id_carte VARCHAR(4), nom_entree VARCHAR(15), nom_plat VARCHAR(15), nom_dessert VARCHAR(15));
+Boisson = (id_boisson VARCHAR(4), nom_apero VARCHAR(15), prix_apero DECIMAL(2,2), nom_soda VARCHAR(15), prix_soda DECIMAL(2,2), nom_digo VARCHAR(15), prix_digo DECIMAL(2,2), type_cafe VARCHAR(15), prix_cafe DECIMAL(2,2));
+Vin = (id_vin VARCHAR(5), mille_vin DATE, date_achat_vin DATE, prix_achat_vin DECIMAL(3,2), prix_vente_vin INT);
+Viticulteur = (id_viticulte VARCHAR(6), nom_viticulte VARCHAR(50), prenom_viticulte VARCHAR(50), rue_viticulte VARCHAR(50), CP_viticulte INT, ville_viticulte VARCHAR(25), tel_viticulte DECIMAL(10,0));
+
+PRENDRE = (#id_carte, #id_service, type_menu VARCHAR(4));
+SUGGERER = (#id_boisson, #id_service);
+PROPOSER = (#id_service, #id_vin);
+VENDRE = (#id_vin, #id_viticulte);
