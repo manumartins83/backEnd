@@ -1,5 +1,5 @@
 CREATE TABLE Service(
-   id_service VARCHAR(3) AUTO_INCREMENT,
+   id_service VARCHAR(3) NOT NULL AUTO_INCREMENT,
    type_service VARCHAR(1) NOT NULL,
    date_service DATE NOT NULL,
    num_table INT NOT NULL,
