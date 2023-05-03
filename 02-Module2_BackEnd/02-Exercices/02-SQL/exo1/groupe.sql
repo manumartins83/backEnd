@@ -23,12 +23,11 @@ CREATE TABLE Groupe(
 
 
 CREATE TABLE Appartient(
-    personne INT,
-    groupe INT,
+    id_appart INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    FK_per_num INT,
+    FK_gro_num INT,
 
-    PRIMARY KEY(personne, groupe),
-    
-    FOREIGN KEY (personne) REFERENCES Personne(per_num),
-    FOREIGN KEY (groupe) REFERENCES Groupe(gro_num)
+    FOREIGN KEY (FK_per_num) REFERENCES Personne(per_num),
+    FOREIGN KEY (FK_gro_num) REFERENCES Groupe(gro_num)
 
 )ENGINE=INNODB;
