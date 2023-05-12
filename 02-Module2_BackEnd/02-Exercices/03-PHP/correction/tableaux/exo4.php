@@ -34,7 +34,7 @@
   $derStageSem = array_search("Stage", array_reverse($a[$gr3]));
   $preStageSem = array_search("Stage", $a[$gr3]);
 
-  echo "Le stage du groupe " . $gr3 . " dure " . ($derStageSem - $preStageSem + 1) . " semaines";
+  echo "Le stage du groupe " . $gr3 . " dure " . ($derStageSem + $preStageSem + 1) . " semaines";
 
   ?>
 
