@@ -1,0 +1,7 @@
+customerID,companyName,contactName,contactTitle,address,city,region,postalCode,country,phone,fax
+
+1,Company A,John Doe,CEO,123 Main St,New York,NY,10001,USA,555-1234,555-1235
+
+2,Company B,Jane Smith,CFO,456 Market St,Los Angeles,CA,90001,USA,555-5678,555-5679
+
+3,Company C,Jim Brown,CTO,789 Elm St,Chicago,IL,60601,USA,555-2468,555-2469

@@ -1,0 +1,79 @@
+/* Réinitialisation CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+/* Ajoutez ces styles pour le conteneur et le contenu principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+/* Votre code CSS existant */
+/* ... */
+
+
+header {
+  background-color: #35424a;
+  padding: 1.5rem 0;
+  color: #fff;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #e8491d;
+  padding: 1rem 0;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav ul li {
+  list-style: none;
+  margin-right: 1rem;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+nav ul li a:hover {
+  background-color: #fff;
+  color: #e8491d;
+  border-radius: 5px;
+}
+
+main {
+  padding: 2rem;
+}
+
+footer {
+  background-color: #35424a;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem 0;
+}
