@@ -18,10 +18,10 @@
   echo "<br>";
 
   $date = new DateTime();
-  $end = new DateTime("2023-09-10");
-  $interval = $date->diff($end)
+  $end = new DateTime("2023-09-21");
+  $interval = $date->diff($end);
 
-  // echo "Il reste " . $interval->format("%a") . " jours avant la fin de la formation";
+  echo "Il reste " . $interval->format("%a") . " jours avant la fin de la formation";
   ?>
 </body>
 

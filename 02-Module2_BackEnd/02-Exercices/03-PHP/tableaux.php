@@ -163,8 +163,23 @@
     echo "La position de la dernière occurence de stage pour le groupe " . $group1 . " est " . $indexTabDerStageGr1;
 
     echo nl2br("\n");
-    ?>
 
+
+    $groupe = 19001;
+    //initialiser la variable qui contiendra la dernière positipn
+    $last = false;
+
+    foreach ($a[$groupe] as $index => $value) {
+
+        // si la valeur actuelle est égale à "stage",stocke sa position
+        if ($value == "Stage") { // la valeur de la recherche du mot stage dans le tableau
+            $last = $index;
+            //la valeur suivante est stocker dans $lat jusqu'à la dernière puis garder dans une variable $index pour pouvoir l'afficher
+
+        }
+    }
+    echo "La dernière position occurence de " . $groupe . " est : " . ($index - 1);
+    ?>
 
 </body>
 
