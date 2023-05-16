@@ -42,7 +42,8 @@
             echo "<ul>";
             while ($row = $stmt->fetch()) {
                 echo "<li>
-            {$row['Nom_court']}</li>";
+                <a href='consult_produit.php?id={$row['Id_Produit']}'>
+            {$row['Nom_court']}</a></li>";
             }
             echo "</ul>";
         }
@@ -54,7 +55,8 @@
             echo "<ul>";
             while ($row = $stmt->fetch()) {
                 echo "<li>
-            {$row['Nom_court']}</li>";
+              <a href='consult_produit.php?id={$row['Id_Produit']}'>
+            {$row['Nom_court']}</a></li>";
             }
             echo "</ul>";
         }

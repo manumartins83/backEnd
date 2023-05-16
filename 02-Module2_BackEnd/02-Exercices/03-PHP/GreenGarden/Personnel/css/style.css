@@ -158,10 +158,11 @@
     justify-content: space-between;
     /* déplacement vertical */
     align-items: center;
-
+    /* soulignement */
+    text-decoration: none;
 }
 
-/* ########## Mise en forme images produits ########## */
+/* ########## Mise en forme images produits page catalogue ########## */
 .styleImgProduit {
     /* largeur */
     width: 150px;
@@ -169,25 +170,41 @@
     height: auto;
 }
 
-
-
-
-
 /* ########## Mise en forme texte produits ########## */
-.styleTextProduit{
-      /* marge intérieure */
-      margin: 20px;
-      /* marge extérieure */
-      padding: 0;
-      /* affichage block */
-      display: flex;
-      /* déplacement block */
-      flex-flow: column wrap;
-      /* déplacement horizontal */
-      justify-content: flex-start;
-      /* déplacement vertical */
-      align-items: stretch;
+.styleTextProduit {
+    /* marge intérieure */
+    margin: 20px;
+    /* marge extérieure */
+    padding: 0;
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: column wrap;
+    /* déplacement horizontal */
+    justify-content: flex-start;
+    /* déplacement vertical */
+    align-items: stretch;
 }
+
+/* ########## Mise en forme bouton ajout panier ########## */
+.styleBtnAjoutPanier {
+    /* marge intérieure */
+    margin: 50px;
+    /* marge extérieure */
+    padding: 5px;
+}
+
+/* ########## Mise en forme images produits page consultation ########## */
+.styleImgProduitConsult {
+    /* largeur */
+    width: 400px;
+    /* hauteur */
+    height: auto;
+}
+
+
+
+
 
 
 
@@ -200,4 +217,50 @@
 .styleFooter {
     /* couleur fond */
     background-color: rgb(0, 0, 0, 0.75);
+}
+
+/* ########## Mise en forme barre Footer gauche ########## */
+.styleFooterLeft {
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: column wrap;
+    /* déplacement horizontal */
+    justify-content: center;
+    /* déplacement vertical */
+    align-items: center;
+}
+
+/* ########## Mise en forme Footer droite ########## */
+.styleFooterRight {
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: row nowrap;
+    /* déplacement horizontal */
+    justify-content: center;
+    /* déplacement vertical */
+    align-items: center;
+}
+
+/* ########## Mise en forme liens Footer ########## */
+.styleHistorique,
+.stylePartenaire,
+.styleMention,
+.styleMail {
+    /* soulignement */
+    text-decoration: none;
+}
+
+/* ########## Mise en forme logos Footer ########## */
+.styleInsta,
+.styleTwit,
+.styleFacebook,
+.styleGoogle {
+    /* marge intérieure */
+    margin: 20px;
+    /* largeur */
+    width: 30px;
+    /* hauteur */
+    height: auto;
 }
