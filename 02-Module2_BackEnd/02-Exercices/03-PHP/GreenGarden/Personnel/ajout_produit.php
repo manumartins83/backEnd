@@ -82,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -98,21 +97,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Titre catalogue -->
     <h1 class="styleTitre">Ajout d'un produit</h1>
 
-    <form method="post" enctype="multipart/form-data">
+    <form class="stylePageProd" method="post" enctype="multipart/form-data">
 
         <div>
-            <label for="nomcourt">Nom :</label>
-            <input type="text" id="nomc" name="nom_court" required>
+            <label class="styleLabelProduit" for="nomcourt">Nom :</label>
+            <input class="styleInputProduit" type="text" id="nomc" name="nom_court" required>
         </div>
 
         <div>
-            <label for="nomlong">Nom long (description) :</label>
-            <input type="text" id="noml" name="nom_long" required>
+            <label class="styleLabelProduit" for="nomlong">Nom long (description) :</label>
+            <input class="styleInputProduit" type="text" id="noml" name="nom_long" required>
         </div>
 
         <div>
-            <label for="fournisseur">Nom fournisseur :</label>
-            <select name="fournisseur">
+            <label class="styleLabelProduit" for="fournisseur">Nom fournisseur :</label>
+            <select class="styleSelectProduit" name="fournisseur">
                 <?php
                 $stmt = $conn->query("SELECT * from t_d_fournisseur");
 
@@ -126,23 +125,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div>
-            <label for="reference">Référence Fournisseur :</label>
-            <input type="text" id="reference" name="reference" required>
+            <label class="styleLabelProduit" for="reference">Référence Fournisseur :</label>
+            <input class="styleInputProduit"type="text" id="reference" name="reference" required>
         </div>
 
         <div>
-            <label for="prix">Prix HT Fournisseur :</label>
-            <input type="number" id="prix" name="prix" min="0" step="0.01" required>
+            <label class="styleLabelProduit" for="prix">Prix HT Fournisseur :</label>
+            <input class="styleInputProduit" type="number" id="prix" name="prix" min="0" step="0.01" required>
         </div>
 
         <div>
-            <label for="tva">Taux TVA :</label>
-            <input type="number" id="tva" name="tva" min="0" step="0.01" required>
+            <label class="styleLabelProduit" for="tva">Taux TVA :</label>
+            <input class="styleInputProduit" type="number" id="tva" name="tva" min="0" step="0.01" required>
         </div>
 
         <div>
-            <label for="categorie">Libellé catégorie :</label>
-            <select name="categorie">
+            <label class="styleLabelProduit" for="categorie">Libellé catégorie :</label>
+            <select class="styleSelectProduit" name="categorie">
                 <?php
                 $stmt = $conn->query("SELECT * from t_d_categorie");
 
@@ -156,11 +155,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div>
-            <label for="photo">Photo :</label>
-            <input type="file" id="photo" name="photo" required>
+            <label class="styleLabelProduit" for="photo">Photo :</label>
+            <input class="styleInputProduit" type="file" id="photo" name="photo" required>
         </div>
 
-        <button type="submit">Ajouter</button>
+        <button class="styleBtnProduit" type="submit">Ajouter</button>
 
     </form>
 

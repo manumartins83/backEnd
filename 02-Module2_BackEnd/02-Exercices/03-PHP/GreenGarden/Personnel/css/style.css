@@ -58,7 +58,6 @@
     vertical-align: center;
     /* couleur fond */
     background-color: rgb(0, 128, 0, 0.75);
-
 }
 
 /* ########## Mise en forme barre menu ########## */
@@ -202,14 +201,25 @@
     height: auto;
 }
 
+.stylePageProd {
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: column nowrap;
+    /* déplacement horizontal */
+    justify-content: flex-start;
+    /* déplacement vertical */
+    align-items: center;
+}
 
+/* ########## Mise en forme label produit ########## */
+.styleLabelProduit {}
 
+/* ########## Mise en forme saisie produit ########## */
+.styleInputProduit,
+.styleSelectProduit {}
 
-
-
-
-
-
+.styleSelectProduit {}
 
 
 
