@@ -3,7 +3,26 @@ create user 'visiteur'@'localhost' identified by 'VisiteurGr33n';
 
 GRANT SELECT 
 ON greengarden.t_d_produit 
-TO 'visiteur'@'localhost' ; 
+TO 'visiteur'@'localhost'; 
+
+-- accès visiteur
+CREATE USER 'visiteur'@'localhost' identified by 'VisiteurGr33n';
+
+GRANT SELECT 
+ON greengarden.t_d_produit 
+TO 'visiteur'@'localhost' IDENTIFIED BY 'VisiteurGr33n';
+GRANT SELECT 
+ON greengarden.t_d_categorie
+TO 'visiteur'@'localhost' IDENTIFIED BY 'VisiteurGr33n';
+GRANT SELECT 
+ON greengarden.t_d_user
+TO 'visiteur'@'localhost' IDENTIFIED BY 'VisiteurGr33n';
+GRANT SELECT 
+ON greengarden.t_d_usertype
+TO 'visiteur'@'localhost' IDENTIFIED BY 'VisiteurGr33n';
+GRANT SELECT 
+ON greengarden.t_d_fournisseur
+TO 'visiteur'@'localhost' IDENTIFIED BY 'VisiteurGr33n';
 
 
 -- accès client

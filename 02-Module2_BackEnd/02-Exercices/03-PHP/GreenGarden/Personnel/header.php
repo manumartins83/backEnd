@@ -24,14 +24,49 @@
                 </div>
             </div>
 
+
+
             <div class="styleMenuRight">
-                <div>
+
+                <?php
+                // Démarrage de la session
+                session_start();
+
+                if (isset($_SESSION['user_id'])) :
+                    // Vérification si l'utilisateur existe déjà dans la base de données
+                    $host = "localhost"; // Nom d'hôte de la base de données
+                    $user = "root"; // Nom d'utilisateur de la base de données
+                    $password_db = ""; // Mot de passe de la base de données
+                    $dbname = "greengarden"; // Nom de la base de données
+
+                    try {
+                        $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $password_db);
+                        // configuration pour afficher les erreurs pdo
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    } catch (PDOException $e) {
+                        echo "Connection failed: " . $e->getMessage();
+                    }
+
+                    $stmt = $conn->prepare("SELECT * FROM t_d_user WHERE Id_User=:id");
+                    $stmt->bindValue(':id', $_SESSION['user_id']);
+                    $stmt->execute();
+                    $use = $stmt->fetch(PDO::FETCH_ASSOC);
+                ?>
+
+                    <p><a href="deconnexion.php">Se déconnecter</a></p>
+                <?php else : ?>
+                    <p><a href="login.php">Se connecter</a> ou <a href="inscription.php">s'inscrire</a></p>
+                <?php endif; ?>
+
+
+
+                <!-- <div>
                     <a href="login.php"><img class="styleLogin" src="img/login.png" alt="Login"></a>
                 </div>
 
                 <div>
                     <a href="inscription.php"><img class="styleInscription" src="img/inscription.png" alt="Inscription"></a>
-                </div>
+                </div> -->
 
                 <div>
                     <a href="panier.php"><img class="stylePanier" src="img/panier.png" alt="Panier"></a>
