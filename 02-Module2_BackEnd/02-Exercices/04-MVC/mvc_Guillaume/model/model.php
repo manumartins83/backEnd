@@ -7,9 +7,7 @@ abstract class Model
     {
         // accès aux données
         $bdd = $this->getBdd();
-        $billets = $bdd->query('SELECT BIL_ID as id, 
-            BIL_DATE as date, BIL_TITRE as titre, BIL_CONTENU as contenu FROM T_BILLET order by BIL_ID desc');
-
+        $billets = $bdd->query('SELECT BIL_ID as id, BIL_DATE as date, BIL_TITRE as titre, BIL_CONTENU as contenu FROM T_BILLET order by BIL_ID desc');
         return $billets;
     }
 
@@ -33,8 +31,7 @@ abstract class Model
     public function getBillet($idBillet)
     {
         $bdd = $this->getBdd();
-        $billet = $bdd->prepare('SELECT BIL_ID as id, BIL_DATE as date, BIL_TITRE as
-titre, BIL_CONTENU as contenu FROM T_BILLET WHERE BIL_ID =?;');
+        $billet = $bdd->prepare('SELECT BIL_ID as id, BIL_DATE as date, BIL_TITRE as titre, BIL_CONTENU as contenu FROM T_BILLET WHERE BIL_ID = ?');
         $billet->execute(array($idBillet));
 
         if ($billet->rowCount() == 1) {

@@ -27,11 +27,13 @@ class Routeur
                             $this->ctrlBillet->billet($idBillet);
                         } else
                             throw new Exception("Identifiant de billet non valide");
-                    } else if ($_GET['action'] == 'commenter') {
-                        $auteur = $this->getParametre($_POST, 'auteur');
-                        $contenu = $this->getParametre($_POST, 'contenu');
-                        $idBillet = $this->getParametre($_POST, 'id');
-                        $this->ctrlBillet->commenter($auteur, $contenu, $idBillet);
+                    } else if (isset($_GET['add'])) {
+                        if ($_GET['add'] == 'commenter') {
+                            $auteur = $this->getParametre($_POST, 'auteur');
+                            $contenu = $this->getParametre($_POST, 'contenu');
+                            $idBillet = $this->getParametre($_POST, 'id');
+                            $this->ctrlBillet->commenter($auteur, $contenu, $idBillet);
+                        }
                     }
                 } else
                     throw new Exception("Action non valide");
@@ -56,6 +58,6 @@ class Routeur
         if (isset($tableau[$nom])) {
             return $tableau[$nom];
         } else
-            throw new Exception("Paramètre '$nom' absent");
+            throw new Exception("Paramètre {$nom} absent");
     }
 }
