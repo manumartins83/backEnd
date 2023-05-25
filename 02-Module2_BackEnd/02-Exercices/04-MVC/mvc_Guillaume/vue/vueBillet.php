@@ -22,7 +22,7 @@
 
 <?php $contenu = ob_get_clean(); ?>
 
-<?php require 'gabarit.php'; ?>
+<?php echo $contenu; ?>
 
 <form method="post" action="index.php?action=commenter">
     <input id="auteur" name="auteur" type="text" placeholder="Votre pseudo" required /><br />

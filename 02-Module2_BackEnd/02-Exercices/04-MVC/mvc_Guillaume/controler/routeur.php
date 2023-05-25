@@ -59,8 +59,3 @@ class Routeur
             throw new Exception("Paramètre '$nom' absent");
     }
 }
-
-$file = 'chemin/vers/le/fichier.php';
-
-// Vider le contenu HTML du fichier
-file_put_contents($file, '');

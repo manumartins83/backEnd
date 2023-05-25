@@ -224,23 +224,67 @@
     /* affichage block */
     display: flex;
     /* déplacement block */
+    flex-flow: row nowrap;
+    /* déplacement horizontal */
+    justify-content: center;
+    /* déplacement vertical */
+    align-items: flex-start;
+}
+
+/* ########## Mise en forme label produit ########## */
+.styleLabelAjoutProduit {
+    /* marge intérieure */
+    margin: 20px;
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
     flex-flow: column nowrap;
     /* déplacement horizontal */
     justify-content: flex-start;
     /* déplacement vertical */
-    align-items: center;
+    align-items: flex-start;
 }
-
-/* ########## Mise en forme label produit ########## */
-.styleLabelAjoutProduit {}
 
 /* ########## Mise en forme saisie produit ########## */
 .styleInputAjoutProduit,
-.styleSelectAjoutProduit {}
+.styleSelectAjoutProduit {
+    /* marge intérieure */
+    margin: 15px;
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: column nowrap;
+    /* déplacement horizontal */
+    justify-content: flex-start;
+    /* déplacement vertical */
+    align-items: flex-start;
+}
 
+/* ########## Mise en forme page bouton ajout produit ########## */
+.styleBtnPageAjoutProduit {
+    /* marge intérieure */
+    margin: 0px 0px 15px;
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: column nowrap;
+    /* déplacement horizontal */
+    justify-content: center;
+    /* déplacement vertical */
+    align-items: center;
+}
 
-
-
+/* ########## Mise en forme bouton ajout produit ########## */
+.styleBtnAjoutProduit {
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: column nowrap;
+    /* déplacement horizontal */
+    justify-content: center;
+    /* déplacement vertical */
+    align-items: center;
+}
 
 /* ########## Mise en forme Footer ########## */
 .styleFooter {
