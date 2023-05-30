@@ -2,11 +2,13 @@ use greengarden;
 DROP TABLE IF EXISTS t_d_user;
 
 
-CREATE TABLE IF NOT EXISTS t_d_user (Id_User int(11) NOT NULL AUTO_INCREMENT,
- Id_UserType int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS t_d_user (
+Id_User int(11) NOT NULL AUTO_INCREMENT,
+Id_UserType int(11) NOT NULL,
 Login varchar(255) NOT NULL,
 Password varchar(255) NOT NULL,
-PRIMARY KEY (Id_User), KEY t_d_user_ibfk_1 (Id_UserType)) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT
+PRIMARY KEY (Id_User), KEY t_d_user_ibfk_1 (Id_UserType)) 
+ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT
 CHARSET=utf8mb4;
 
 --
@@ -16,9 +18,11 @@ CHARSET=utf8mb4;
 DROP TABLE IF EXISTS t_d_usertype;
 
 
-CREATE TABLE IF NOT EXISTS t_d_usertype (Id_UserType int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS t_d_usertype (
+Id_UserType int(11) NOT NULL AUTO_INCREMENT,
 Libelle varchar(50) NOT NULL,
-PRIMARY KEY (Id_UserType)) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT
+PRIMARY KEY (Id_UserType)) 
+ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT
 CHARSET=utf8mb4;
 
 --
