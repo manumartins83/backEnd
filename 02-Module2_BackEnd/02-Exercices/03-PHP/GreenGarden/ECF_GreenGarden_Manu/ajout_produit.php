@@ -139,13 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </select>
             <input class="styleInputAjoutProduit" type="file" id="photo" name="photo" required>
+            <div class="styleBtnPageAjoutProduit">
+                <button class="styleBtnAjoutProduit" type="submit">Ajouter</button>
+            </div>
         </div>
-
+        
     </form>
-
-    <div class="styleBtnPageAjoutProduit">
-        <button class="styleBtnAjoutProduit" type="submit">Ajouter</button>
-    </div>
 
     <!-- Footer -->
     <?php include 'footer.php'; ?>

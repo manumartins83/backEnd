@@ -25,11 +25,35 @@
                 }
                 if (
                     isset($_SESSION['user_id']) && isset($_SESSION['user_type'])
-                    && ($_SESSION['user_type'] == 'Commercial' || $_SESSION['user_type'] == 'Admin')
+                    && ($_SESSION['user_type'] == 'Client')
+                ) {
+                    echo '<div><a class="styleTextMenu" href="consult_ticket_cli.php">Tickets retour</a></div>';
+                }
+                if (
+                    isset($_SESSION['user_id']) && isset($_SESSION['user_type'])
+                    && ($_SESSION['user_type'] == 'Commercial')
                 ) {
                     echo '<div><a class="styleTextMenu" href="ajout_produit.php">Ajout Produit</a></div>';
                     echo '<div><a class="styleTextMenu" href="ajout_fournisseur.php">Ajout Fournisseur</a></div>';
                     echo '<div><a class="styleTextMenu" href="ajout_categorie.php">Ajout Categorie</a></div>';
+                    echo '<div><a class="styleTextMenu" href="consult_ticket_com.php">Tickets retour</a></div>';
+                }
+                if (
+                    isset($_SESSION['user_id']) && isset($_SESSION['user_type'])
+                    && ($_SESSION['user_type'] == 'Admin')
+                ) {
+                    echo '<div><a class="styleTextMenu" href="ajout_produit.php">Ajout Produit</a></div>';
+                    echo '<div><a class="styleTextMenu" href="ajout_fournisseur.php">Ajout Fournisseur</a></div>';
+                    echo '<div><a class="styleTextMenu" href="ajout_categorie.php">Ajout Categorie</a></div>';
+                    echo '<div><a class="styleTextMenu" href="ajout_ticket.php">Ajout ticket</a></div>';
+                    echo '<div><a class="styleTextMenu" href="modif_tickets.php">Tickets retour</a></div>';
+                }
+                if (
+                    isset($_SESSION['user_id']) && isset($_SESSION['user_type'])
+                    && ($_SESSION['user_type'] == 'Technicien')
+                ) {
+                    echo '<div><a class="styleTextMenu" href="ajout_ticket.php">Ajout ticket</a></div>';
+                    echo '<div><a class="styleTextMenu" href="modif_tickets.php">Tickets retour</a></div>';
                 }
                 ?>
             </div>

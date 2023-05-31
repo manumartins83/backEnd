@@ -60,6 +60,12 @@
     background-color: rgb(0, 128, 0, 0.75);
 }
 
+/* ########## Mise en forme Titre secondaire ########## */
+.styleTitreSecondaire {
+    /* alignement texte */
+    text-align: center;
+}
+
 /* ########## Mise en forme barre menu ########## */
 .styleMenu {
     /* affichage block */
@@ -84,6 +90,20 @@
     justify-content: flex-start;
     /* déplacement vertical */
     align-items: center;
+}
+
+/* ########## Mise en forme texte barre menu gauche ########## */
+.styleTextMenu {
+    /* marge intérieure */
+    padding: 20px;
+    /* soulignement */
+    text-decoration: none;
+    /* epaisseur police */
+    font-weight: bolder;
+    /* taille police */
+    font-size: 30px;
+    /* couleur police */
+    color: green;
 }
 
 /* ########## Mise en forme barre menu droite ########## */
@@ -188,7 +208,8 @@
 }
 
 /* ########## Mise en forme texte produits ########## */
-.styleTextProduit {
+.styleTextProduit,
+.styleTextTicket {
     /* marge intérieure */
     margin: 20px;
     /* marge extérieure */
@@ -220,7 +241,9 @@
 }
 
 /* ########## Mise en forme page ajout produits ########## */
-.stylePageAjoutProduit {
+.stylePageAjoutProduit,
+.stylePageAjoutTicket,
+.stylePageAfficheTicket {
     /* affichage block */
     display: flex;
     /* déplacement block */
@@ -232,7 +255,9 @@
 }
 
 /* ########## Mise en forme label produit ########## */
-.styleLabelAjoutProduit {
+.styleLabelAjoutProduit,
+.styleLabelAjoutTicket,
+.styleLabelAfficheTicket {
     /* marge intérieure */
     margin: 20px;
     /* affichage block */
@@ -247,7 +272,10 @@
 
 /* ########## Mise en forme saisie produit ########## */
 .styleInputAjoutProduit,
-.styleSelectAjoutProduit {
+.styleSelectAjoutProduit,
+.styleInputAjoutTicket,
+.styleSelectAjoutTicket,
+.styleSelectAfficheTicket {
     /* marge intérieure */
     margin: 15px;
     /* affichage block */
@@ -261,7 +289,9 @@
 }
 
 /* ########## Mise en forme page bouton ajout produit ########## */
-.styleBtnPageAjoutProduit {
+.styleBtnPageAjoutProduit,
+.styleBtnPageAjoutTicket,
+.styleBtnPageAfficheTicket {
     /* marge intérieure */
     margin: 0px 0px 15px;
     /* affichage block */
@@ -275,7 +305,9 @@
 }
 
 /* ########## Mise en forme bouton ajout produit ########## */
-.styleBtnAjoutProduit {
+.styleBtnAjoutProduit,
+.styleBtnAjoutTicket,
+.styleBtnAfficheTicket {
     /* affichage block */
     display: flex;
     /* déplacement block */

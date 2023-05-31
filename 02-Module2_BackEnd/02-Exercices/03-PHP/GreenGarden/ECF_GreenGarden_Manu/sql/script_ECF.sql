@@ -84,11 +84,11 @@ CREATE TABLE IF NOT EXISTS t_d_ticketSAV(
 );
 
 INSERT INTO t_d_ticketSAV(Id_Ticket_SAV,Num_Ticket_SAV,Date_Ticket_SAV,Statut_Ticket_SAV,Id_Technicien_SAV,Id_Commande,Id_Retour) 
-VALUES (1,TIC0000230,'2023-04-03 08:32:05','résolu',1,3,2);
+VALUES (1,TIC0000001,'2023-04-03 08:32:05','résolu',1,3,2);
 INSERT INTO t_d_ticketSAV(Id_Ticket_SAV,Num_Ticket_SAV,Date_Ticket_SAV,Statut_Ticket_SAV,Id_Technicien_SAV,Id_Commande,Id_Retour) 
-VALUES (2,TIC0000231,'2023-05-07 10:25:08','créé',2,4,5);
+VALUES (2,TIC0000002,'2023-05-07 10:25:08','créé',2,4,5);
 INSERT INTO t_d_ticketSAV(Id_Ticket_SAV,Num_Ticket_SAV,Date_Ticket_SAV,Statut_Ticket_SAV,Id_Technicien_SAV,Id_Commande,Id_Retour) 
-VALUES (3,TIC0000232,'2023-05-26 12:02:14','suivi',2,5,6);
+VALUES (3,TIC0000003,'2023-05-26 12:02:14','suivi',2,5,6);
 
 -- insertion auto numéro ticket retour
 DELIMITER $$
