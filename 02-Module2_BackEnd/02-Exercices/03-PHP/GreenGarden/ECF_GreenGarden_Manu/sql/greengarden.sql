@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 23 mai 2023 à 16:43
+-- Généré le : jeu. 01 juin 2023 à 16:48
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -141,9 +141,9 @@ CREATE TABLE `t_d_client` (
 --
 
 INSERT INTO `t_d_client` (`Id_Client`, `Nom_Societe_Client`, `Nom_Client`, `Prenom_Client`, `Mail_Client`, `Tel_Client`, `Id_Commercial`, `Id_Type_Client`, `DelaiPaiement_Client`, `Num_Client`, `Id_User`) VALUES
-(2, 'Gamm Vert', NULL, NULL, 'conches@gammvert.fr', NULL, 1, 2, 30, 'CLI0000001', 12),
-(3, NULL, 'Truc', 'Muche', 'trucmuche@yahoo.fr', '0123456789', 1, 1, 0, 'CLI0000002', 13),
-(4, NULL, 'Gonzales', 'Roberto', 'robertogonzales@gmail.com.fr', '0987654321', 2, 1, 0, 'CLI0000003', 14);
+(2, 'Gamm Vert', NULL, NULL, 'conches@gammvert.fr', NULL, 1, 2, 30, 'CLI0000001', 15),
+(3, NULL, 'Truc', 'Muche', 'trucmuche@yahoo.fr', '0123456789', 1, 1, 0, 'CLI0000002', 16),
+(4, NULL, 'Gonzales', 'Roberto', 'robertogonzales@gmail.com.fr', '0987654321', 2, 1, 0, 'CLI0000003', 18);
 
 --
 -- Déclencheurs `t_d_client`
@@ -224,16 +224,17 @@ DELIMITER ;
 DROP TABLE IF EXISTS `t_d_commercial`;
 CREATE TABLE `t_d_commercial` (
   `Id_Commercial` int(11) NOT NULL,
-  `Nom_Commercial` varchar(50) NOT NULL
+  `Nom_Commercial` varchar(50) NOT NULL,
+  `Id_User` int(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_d_commercial`
 --
 
-INSERT INTO `t_d_commercial` (`Id_Commercial`, `Nom_Commercial`) VALUES
-(1, 'Jean Ventout'),
-(2, 'Monique Rabais');
+INSERT INTO `t_d_commercial` (`Id_Commercial`, `Nom_Commercial`, `Id_User`) VALUES
+(1, 'Jean Ventout', 13),
+(2, 'Monique Rabais', 14);
 
 -- --------------------------------------------------------
 
@@ -429,6 +430,94 @@ INSERT INTO `t_d_statut_commande` (`Id_Statut`, `Libelle_Statut`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `t_d_techniciensav`
+--
+
+DROP TABLE IF EXISTS `t_d_techniciensav`;
+CREATE TABLE `t_d_techniciensav` (
+  `Id_Technicien_SAV` int(11) NOT NULL,
+  `Nom_Technicien` varchar(255) NOT NULL,
+  `Id_User` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `t_d_techniciensav`
+--
+
+INSERT INTO `t_d_techniciensav` (`Id_Technicien_SAV`, `Nom_Technicien`, `Id_User`) VALUES
+(1, 'Jéjé Touréparé', 17),
+(2, 'Jeanne Tounické', 19);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_d_ticketsav`
+--
+
+DROP TABLE IF EXISTS `t_d_ticketsav`;
+CREATE TABLE `t_d_ticketsav` (
+  `Id_Ticket_SAV` int(11) NOT NULL,
+  `Num_Ticket_SAV` varchar(255) DEFAULT NULL,
+  `Date_Ticket_SAV` datetime DEFAULT NULL,
+  `Statut_Ticket_SAV` varchar(255) DEFAULT NULL,
+  `Id_Technicien_SAV` int(11) NOT NULL,
+  `Id_Commande` int(11) NOT NULL,
+  `Id_Retour` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `t_d_ticketsav`
+--
+
+INSERT INTO `t_d_ticketsav` (`Id_Ticket_SAV`, `Num_Ticket_SAV`, `Date_Ticket_SAV`, `Statut_Ticket_SAV`, `Id_Technicien_SAV`, `Id_Commande`, `Id_Retour`) VALUES
+(1, 'TIC0000001', '2023-04-03 08:32:05', 'suivi', 1, 3, 2),
+(2, 'TIC0000002', '2023-05-07 10:25:08', 'résolu', 2, 4, 5),
+(42, 'TIC0000003', '2023-06-01 15:41:22', 'crée', 1, 4, 4);
+
+--
+-- Déclencheurs `t_d_ticketsav`
+--
+DROP TRIGGER IF EXISTS `tr_ticket_generate_numticket`;
+DELIMITER $$
+CREATE TRIGGER `tr_ticket_generate_numticket` BEFORE INSERT ON `t_d_ticketsav` FOR EACH ROW BEGIN
+    DECLARE prefix CHAR(3) DEFAULT 'TIC';
+    DECLARE Num_Ticket_SAV INT;
+
+    SELECT COUNT(*) INTO Num_Ticket_SAV FROM t_d_ticketSAV;
+    SET Num_Ticket_SAV = Num_Ticket_SAV + 1;
+
+    SET NEW.Num_Ticket_SAV = CONCAT(prefix, LPAD(Num_Ticket_SAV, 7, '0'));
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_d_typeretour`
+--
+
+DROP TABLE IF EXISTS `t_d_typeretour`;
+CREATE TABLE `t_d_typeretour` (
+  `Id_Retour` int(11) NOT NULL,
+  `Libelle_Retour` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `t_d_typeretour`
+--
+
+INSERT INTO `t_d_typeretour` (`Id_Retour`, `Libelle_Retour`) VALUES
+(1, 'NPAI'),
+(2, 'abs'),
+(3, 'erreur cde'),
+(4, 'panne'),
+(5, 'abimé'),
+(6, 'non conforme');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `t_d_type_adresse`
 --
 
@@ -512,7 +601,10 @@ INSERT INTO `t_d_user` (`Id_User`, `Id_UserType`, `Login`, `Password`) VALUES
 (13, 3, 'TETE', '$2y$10$JrxqEbIdY4cz/bwqVdHF/u4cxIXDLwCxb7B78h15xsWBwGeCQQyem'),
 (14, 3, 'TITI', '$2y$10$O1WgQYZcjpy21gdFjDO3a.4nJVJimo0NGkizq7O7gtjWC6b0mNvJC'),
 (15, 1, 'TOTO', '$2y$10$6r1FUGasAlFXuYXPKmCPz.TPi8ZbQT1k52CF1ZoriErbUyFKx7lJS'),
-(16, 1, 'TYTY', '$2y$10$wZm9bBdq5X710/KKCEP1j..3I00UFpsfvzAVS1CyT4bALNlcVpOBe');
+(16, 1, 'TYTY', '$2y$10$wZm9bBdq5X710/KKCEP1j..3I00UFpsfvzAVS1CyT4bALNlcVpOBe'),
+(17, 4, 'TONTON', '$2y$10$WHq35lmhVyjnya2xV3/Cpe0LUMExz.EtFnU143vFkHiJiI7qM/8UO'),
+(18, 1, 'JOJO', '$2y$10$7ak7.uC8bB.1Ps1NtxFtJOLodn664JshqqhE5LOLZm71h/pezZJpm'),
+(19, 4, 'TUTU', '$2y$10$4ufHIhb.9nWVmP7jgk6I0eskQV8G8GvJNCQM9jZtCyt72DWL.y21K');
 
 -- --------------------------------------------------------
 
@@ -533,7 +625,8 @@ CREATE TABLE `t_d_usertype` (
 INSERT INTO `t_d_usertype` (`Id_UserType`, `Libelle`) VALUES
 (1, 'Client'),
 (2, 'Admin'),
-(3, 'Commercial');
+(3, 'Commercial'),
+(4, 'Technicien');
 
 --
 -- Index pour les tables déchargées
@@ -583,7 +676,8 @@ ALTER TABLE `t_d_commande`
 -- Index pour la table `t_d_commercial`
 --
 ALTER TABLE `t_d_commercial`
-  ADD PRIMARY KEY (`Id_Commercial`);
+  ADD PRIMARY KEY (`Id_Commercial`),
+  ADD KEY `t_d_commercial_ibfk_user` (`Id_User`);
 
 --
 -- Index pour la table `t_d_expedition`
@@ -625,6 +719,28 @@ ALTER TABLE `t_d_produit`
 --
 ALTER TABLE `t_d_statut_commande`
   ADD PRIMARY KEY (`Id_Statut`);
+
+--
+-- Index pour la table `t_d_techniciensav`
+--
+ALTER TABLE `t_d_techniciensav`
+  ADD PRIMARY KEY (`Id_Technicien_SAV`),
+  ADD KEY `Id_User` (`Id_User`);
+
+--
+-- Index pour la table `t_d_ticketsav`
+--
+ALTER TABLE `t_d_ticketsav`
+  ADD PRIMARY KEY (`Id_Ticket_SAV`),
+  ADD KEY `Id_Technicien_SAV` (`Id_Technicien_SAV`),
+  ADD KEY `Id_Commande` (`Id_Commande`),
+  ADD KEY `Id_Retour` (`Id_Retour`);
+
+--
+-- Index pour la table `t_d_typeretour`
+--
+ALTER TABLE `t_d_typeretour`
+  ADD PRIMARY KEY (`Id_Retour`);
 
 --
 -- Index pour la table `t_d_type_adresse`
@@ -722,6 +838,24 @@ ALTER TABLE `t_d_statut_commande`
   MODIFY `Id_Statut` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT pour la table `t_d_techniciensav`
+--
+ALTER TABLE `t_d_techniciensav`
+  MODIFY `Id_Technicien_SAV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `t_d_ticketsav`
+--
+ALTER TABLE `t_d_ticketsav`
+  MODIFY `Id_Ticket_SAV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT pour la table `t_d_typeretour`
+--
+ALTER TABLE `t_d_typeretour`
+  MODIFY `Id_Retour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT pour la table `t_d_type_adresse`
 --
 ALTER TABLE `t_d_type_adresse`
@@ -743,7 +877,7 @@ ALTER TABLE `t_d_type_paiement`
 -- AUTO_INCREMENT pour la table `t_d_user`
 --
 ALTER TABLE `t_d_user`
-  MODIFY `Id_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Id_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `t_d_usertype`
@@ -792,6 +926,12 @@ ALTER TABLE `t_d_commande`
   ADD CONSTRAINT `t_d_commande_ibfk_3` FOREIGN KEY (`Id_Client`) REFERENCES `t_d_client` (`Id_Client`);
 
 --
+-- Contraintes pour la table `t_d_commercial`
+--
+ALTER TABLE `t_d_commercial`
+  ADD CONSTRAINT `t_d_commercial_ibfk_user` FOREIGN KEY (`Id_User`) REFERENCES `t_d_user` (`Id_User`);
+
+--
 -- Contraintes pour la table `t_d_facture`
 --
 ALTER TABLE `t_d_facture`
@@ -810,6 +950,20 @@ ALTER TABLE `t_d_lignecommande`
 ALTER TABLE `t_d_produit`
   ADD CONSTRAINT `t_d_produit_ibfk_1` FOREIGN KEY (`Id_Fournisseur`) REFERENCES `t_d_fournisseur` (`Id_Fournisseur`),
   ADD CONSTRAINT `t_d_produit_ibfk_2` FOREIGN KEY (`Id_Categorie`) REFERENCES `t_d_categorie` (`Id_Categorie`);
+
+--
+-- Contraintes pour la table `t_d_techniciensav`
+--
+ALTER TABLE `t_d_techniciensav`
+  ADD CONSTRAINT `t_d_techniciensav_ibfk_1` FOREIGN KEY (`Id_User`) REFERENCES `t_d_user` (`Id_User`);
+
+--
+-- Contraintes pour la table `t_d_ticketsav`
+--
+ALTER TABLE `t_d_ticketsav`
+  ADD CONSTRAINT `t_d_ticketsav_ibfk_1` FOREIGN KEY (`Id_Technicien_SAV`) REFERENCES `t_d_techniciensav` (`Id_Technicien_SAV`),
+  ADD CONSTRAINT `t_d_ticketsav_ibfk_2` FOREIGN KEY (`Id_Commande`) REFERENCES `t_d_commande` (`Id_Commande`),
+  ADD CONSTRAINT `t_d_ticketsav_ibfk_3` FOREIGN KEY (`Id_Retour`) REFERENCES `t_d_typeretour` (`Id_Retour`);
 
 --
 -- Contraintes pour la table `t_d_user`

@@ -1,0 +1,123 @@
+<?php
+// creation_ticket.php
+include('../includes/header.php');
+
+// Connexion à la base de données
+$servername = "localhost";
+$username = "root";
+$password = "new_password";
+$dbname = "greengarden";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $idcmd = $_POST['idcmd'];
+    $idRetour = $_POST['idRetour'];
+
+    // Vérifier si la commande existe
+    $stmt = $conn->prepare("SELECT * FROM t_d_commande WHERE Num_Commande = ?");
+    $stmt->execute([$idcmd]);
+    $commande = $stmt->fetch();
+
+    if ($commande === false) {
+        // L'Id_Commande n'existe pas dans t_d_commande
+        // Vous pouvez gérer cette situation comme vous le souhaitez, par exemple en affichant un message d'erreur
+        echo "La commande n'existe pas.";
+        exit();
+    } else {
+        $idcmd = $commande['Id_Commande']; // Assurez-vous que 'Id_Commande' correspond au nom de la colonne dans votre base de données
+    }
+
+    $stmt = $conn->prepare("INSERT INTO t_d_ticketsav (Date_Ticket_SAV, Statut_Ticket_SAV, Id_Commande, Id_Retour) 
+    VALUES ( NOW(), 'créé', :id_commande, :id_retour)");
+    $stmt->bindValue(':id_commande', $idcmd);
+    $stmt->bindValue(':id_retour', $idRetour);
+    $stmt->execute();
+
+    // Récupérer l'ID du ticket nouvellement créé
+    $ticketId = $conn->lastInsertId();
+
+    echo "Ticket créé avec succès. ID du ticket : " . $ticketId;
+} else {
+    // Afficher le formulaire de création de ticket
+    ?>
+    <form action="technicienSAV.php" method="post">
+        <label for="idcmd">Numéro de commande :</label>
+        <input type="text" id="idcmd" name="idcmd" required>
+
+        <label for="idRetour">Motif du retour :</label>
+        <select id="idRetour" name="idRetour" required>
+            <?php
+            // Récupérer les motifs de retour depuis la base de données
+            $stmt = $conn->query("SELECT * FROM t_d_typeretour");
+            $retours = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($retours as $retour) {
+                echo "<option value=\"" . $retour['Id_Retour'] . "\">"
+                
+                . $retour['Libelle_Retour'] . "</option>";
+            }
+            ?>
+        </select>
+        <input type="submit" value="Créer le ticket">
+        <br><br>
+    </form>
+    <?php
+}
+?>
+
+<?php
+    // Récupérer et afficher les tickets SAV depuis la base de données
+    $servername = "localhost";
+    $username = "root";
+    $password = "new_password";
+    $dbname = "greengarden";
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $conn->query("SELECT * FROM t_d_ticketsav");
+        $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($tickets)) {
+            foreach ($tickets as $ticket) {
+                echo "<tr>";
+                echo "<td class='text-center'>" . $ticket['Num_Ticket_SAV'] . "</td>";
+                echo "<td class='text-center'>" . $ticket['Date_Ticket_SAV'] . "</td>";
+                echo "<td class='text-center'>" . $ticket['Statut_Ticket_SAV'] . "</td>";
+                echo "<td class='text-center'>";
+                echo "<form action='update_ticket_status.php' method='post' onsubmit='return validateForm(this)'>";
+                echo "<input type='hidden' name='ticket_id' value='" . $ticket['Num_Ticket_SAV'] . "'>";
+                echo "<div class='input-group'>";
+                echo "<select name='new_status' class='form-select' required>";
+                echo "<option value=''>--Select Status--</option>";
+                echo "<option value='Suivi'>Suivi</option>";
+                echo "<option value='Résolu'>Résolu</option>";
+                echo "</select>";
+                echo "<button type='submit' class='btn btn-primary'>Update Status</button>";
+                echo "</div>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+                
+                
+                
+                
+            }
+        } else {
+            echo "<tr><td colspan='5'>Aucun ticket SAV existant</td></tr>";
+        }
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+    ?>
+</table>
+<?php
+include('../includes/footer.php');
+?>

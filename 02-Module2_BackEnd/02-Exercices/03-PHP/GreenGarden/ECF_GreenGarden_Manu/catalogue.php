@@ -100,7 +100,7 @@
             echo "</div>";
 
             echo "<form method='POST' action='ajout_panier.php'>
-            <input type='hidden' name='id' value=' {$row['Id_Produit']}'>
+            <input type='hidden' name='id' value='{$row['Id_Produit']}'>
             <input class='styleBtnAjoutPanier' type='submit' value='Ajouter au panier'>
             </form>";
 

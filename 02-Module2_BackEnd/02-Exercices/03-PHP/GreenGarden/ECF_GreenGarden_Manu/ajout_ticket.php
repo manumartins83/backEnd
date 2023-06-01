@@ -33,7 +33,7 @@ $stmt->bindValue(':useid', $user_id);
 $stmt->execute();
 $technicien = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// requête de récupération bases données
+// requête de récupération dans base données
 $bons_cde = $pdo->query("SELECT * FROM t_d_commande")->fetchAll();
 $tickets_retour = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll();
 $types_retour = $pdo->query("SELECT * FROM t_d_typeretour")->fetchAll();
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Id_Technicien_SAV, Id_Commande, Id_Retour) 	
     VALUES (:dateTicket, :statutTicket, :technicien, :cde, :retour)");
     $stmt->bindValue(':dateTicket', $today);
-    // $stmt->bindValue(':statutTicket', '$statut_ticket_retour');
+    // $stmt->bindValue(':statutTicket', $statut_ticket_retour);
     $stmt->bindValue(':statutTicket', 'crée');
     $stmt->bindValue(':technicien', $technicien['Id_Technicien_SAV']);
     $stmt->bindValue(':cde', $cde_id);

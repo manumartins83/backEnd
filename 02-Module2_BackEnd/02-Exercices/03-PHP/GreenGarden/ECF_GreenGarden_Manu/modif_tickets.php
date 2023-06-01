@@ -1,16 +1,18 @@
 <?php
+// démarrage session loguage
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
+// si utilisateur pas logué
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
     exit;
 }
 
+// création variable Id utilisateur connecté
 $user_id = $_SESSION['user_id'];
 
-// Récupération des informations de l'utilisateur connecté
+// création variables récupération des infos de l'utilisateur connecté
 $host = "localhost"; // Nom d'hôte de la base de données
 $user = "root"; // Nom d'utilisateur de la base de données
 $password_db = ""; // Mot de passe de la base de données
@@ -30,39 +32,21 @@ $stmt->bindValue(':useid', $user_id);
 $stmt->execute();
 $technicien = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-$bons_cde = $pdo->query("SELECT * FROM t_d_commande")->fetchAll();
-$tickets_retour = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll();
-$types_retour = $pdo->query("SELECT * FROM t_d_typeretour")->fetchAll();
-
+// requête de récupération dans base données
+$sql = "SELECT * FROM t_d_ticketsav";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // récupérer les informations du formulaire
-    $cde_id = $_POST['num_bon_cde'];
-    // $ticket_id = $_POST['num_tickets_retour'];
     $statut_ticket_retour = $_POST['statut_ticket'];
-    $type_retour_id = $_POST['cause_retour'];
-    // $suppr_ticket = $_POST['suppr_ticket_retour'];
-    $today = date("Y-m-d H:i:s");
-
 
     // insérer le ticket dans la base de données
-    $stmt = $pdo->prepare("INSERT INTO t_d_ticketsav (Date_Ticket_SAV, Statut_Ticket_SAV, 
-    Id_Technicien_SAV, Id_Commande, Id_Retour) 	
-    VALUES (:dateTicket, :statutTicket, :technicien, :cde, :retour)");
-    $stmt->bindValue(':dateTicket', $today);
-    // $stmt->bindValue(':statutTicket', '$statut_ticket_retour');
-    $stmt->bindValue(':statutTicket', 'crée');
-    $stmt->bindValue(':technicien', $technicien['Id_Technicien_SAV']);
-    $stmt->bindValue(':cde', $cde_id);
-    $stmt->bindValue(':retour', $type_retour_id);
+    $stmt = $pdo->prepare("UPDATE t_d_ticketsav SET Statut_Ticket_SAV=:statutTicket WHERE Id_Ticket_SAV=:idTicket");
+    $stmt->bindValue(':statutTicket', $statut_ticket_retour);
+    $stmt->bindValue(':idTicket', $tickets['Id_Ticket_SAV']);
     $stmt->execute();
-
-    $order_id = $pdo->lastInsertId();
-
-    // Rediriger vers la page des tickets SAV avec un message de succès
-    // header('Location: ticket_retour.php');
-    // exit;
 }
 ?>
 
@@ -80,85 +64,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'header.php'; ?>
 
     <!-- Titre principal -->
-    <h1 class="styleTitre">Création ticket retour</h1>
-
-    <form class="stylePageAjoutTicket" method="post">
-
-        <div>
-            <label class="styleLabelAjoutTicket" for="num_bon_cde">Numéro bon commande :</label>
-            <label class="styleLabelAjoutTicket" for="statut_ticket">Statut ticket retour :</label>
-            <!-- <label class="styleLabelAjoutTicket" for="cause_retour">Cause du retour :</label> -->
-            <!-- <label class="styleLabelAjoutTicket" for="suppr_ticket_retour">Supprimer le ticket retour :</label> -->
-        </div>
-
-        <div>
-            <select class="styleSelectAjoutTicket" name="num_bon_cde">
-                <?php foreach ($bons_cde as $bon_cde) { ?>
-                    <option value="<?= $bon_cde['Id_Commande'] ?>"><?= $bon_cde['Num_Commande'] ?></option>
-                <?php } ?>
-            </select>
-            <select class="styleSelectAjoutTicket" name="cause_retour">
-                <?php foreach ($types_retour as $type_retour) { ?>
-                    <option value="<?= $type_retour['Id_Retour'] ?>"><?= $type_retour['Libelle_Retour'] ?></option>
-                <?php } ?><br>
-            </select>
-            <!-- <input class="styleInputAjoutTicket" type="checkbox" id="suppr_ticket_retour" name="suppr_ticket_retour"> -->
-            <div class="styleBtnPageAjoutTicket">
-                <input class="styleBtnAjoutTicket" type="submit" value="Créer ticket">
-            </div>
-        </div>
-
-    </form>
-
-    <!-- Titre principal -->
     <h1 class="styleTitre">Modification des tickets retour</h1>
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Afficher un message de succès
-        echo "<h2 class='styleTitreSecondaire'>Ticket créé avec succès !</h2>";
+        echo "<h2 class='styleTitreSecondaire'>Ticket modifié avec succès !</h2>";
     }
 
-    $sql = "select * from t_d_ticketsav";
-    $stmt = $conn->query($sql);
+    // $sql = "select * from t_d_ticketsav";
+    // $stmt = $pdo->query($sql);
 
-    if ($stmt->rowCount() > 0) {
-        while ($row = $stmt->fetch()) {
-
+    // if ($stmt->rowCount() > 0) {
+    // while ($row = $stmt->fetch()) {
+    if (!empty($tickets)) {
+        foreach ($tickets as $ticket) {
             // liste des tickets
             echo "<div class='styleTextTicket'>";
-            echo "<div class='card-body'><strong>Numéro du ticket : </strong>" . $row['Num_Ticket_SAV'] . "</div>";
-            echo "<div class='card-body'><strong>Date du ticket : </strong>{$row['Date_Ticket_SAV']}</div>";
-            echo "<div class='card-body'><strong>Statut du ticket : </strong>" . $row['Statut_Ticket_SAV'] .
+            echo "<div class='card-body'><strong>Numéro du ticket : </strong>" . $ticket['Num_Ticket_SAV'] . "</div>";
+            echo "<div class='card-body'><strong>Date du ticket : </strong>{$ticket['Date_Ticket_SAV']}</div>";
 
+            echo '<div class="card-body"><strong>Statut du ticket : </strong>' . $ticket['Statut_Ticket_SAV'] .
                 '<form class="stylePageModifTicket" method="post">
-
             <div>
+
                 <select class="styleSelectModifTicket" name="statut_ticket"> 
-                     foreach ($tickets_retour as $ticket_retour) { 
-                        <option value="<?php echo $ticket_retour["Statut_Ticket_SAV"] ?>"><?php echo $ticket_retour["Statut_Ticket_SAV"] ?></option>
-                     } 
+                        <option value="suivi">suivi</option>
+                        <option value="resolu">résolu</option>
                 </select>
             
                 <div class="styleBtnPageModifTicket">
+                    <input type="hidden" name="id" value="' . $ticket["Id_Ticket_SAV"] . '">
                     <input class="styleBtnModifTicket" type="submit" value="Modifier ticket">
                 </div>
             </div>
-            
             </form>'
-
-
-
-
-                . "</div>";
-
-
-
-
-
-
-
-
+                . '</div>';
 
             echo "</div>";
         }

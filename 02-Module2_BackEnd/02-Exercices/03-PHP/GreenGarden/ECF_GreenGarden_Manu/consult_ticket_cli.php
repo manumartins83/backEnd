@@ -62,8 +62,16 @@ $tickets = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll(PDO::FETCH_ASSOC
 
         <div>
             <select class="styleSelectAfficheTicket" name="num_bon_cde">
-                <?php foreach ($bons_cde as $bon_cde) { ?>
-                    <option value="<?= $bon_cde['Id_Commande'] ?>"><?= $bon_cde['Num_Commande'] ?></option>
+                <?php
+                // requête de récupération dans base données
+                $sql = "SELECT * FROM t_d_commande WHERE Id_Client=:useid";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindValue(':useid', $client['Id_Client']);
+                $stmt->execute();
+
+                // Affichage message du bon commande correspondant aux tickets
+                while ($numCde = $stmt->fetch()) { ?>
+                    <option value="<?= $numCde['Id_Commande'] ?>"><?= $numCde['Num_Commande'] ?></option>
                 <?php } ?>
             </select>
 
@@ -84,7 +92,7 @@ $tickets = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll(PDO::FETCH_ASSOC
         // récupération des infos du formulaire
         $cde_id = $_POST['num_bon_cde'];
 
-        // requête de récupération bases données
+        // requête de récupération dans base données
         $sql = "SELECT * FROM t_d_commande WHERE Id_Commande=:numCde";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':numCde', $cde_id);
@@ -96,7 +104,7 @@ $tickets = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll(PDO::FETCH_ASSOC
         }
         $stmt->closeCursor(); //vide mémoire
 
-        // requête de récupération bases données
+        // requête de récupération dans base données
         $sql = "SELECT * FROM t_d_ticketsav WHERE Id_Commande=:idCde";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':idCde', $cde_id);
