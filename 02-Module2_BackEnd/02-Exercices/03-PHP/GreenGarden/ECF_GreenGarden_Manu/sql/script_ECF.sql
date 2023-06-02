@@ -24,6 +24,7 @@ INSERT INTO t_d_usertype(Id_UserType,Libelle) VALUES (4,'Technicien');
 -- Depuis l'interface inscription.php
 -- Login:TONTON pwd:TONTON (sera technicien) => Id_User = 17
 -- Login:TUTU pwd:TUTU (sera technicien) => Id_User = 19
+-- Login:JOJO pwd:JOJO (sera client) => Id_User = 18
 
 
 -- Ajout Id_User table "t_d_commercial"
@@ -105,13 +106,18 @@ $$
 DELIMITER ;
 
 
+
 -- Modifier requête SQL pour "Jéjé Touréparé" (technicien Login:TONTON pwd:TONTON)
 UPDATE t_d_user
 SET Id_UserType=4
 WHERE Login='TONTON';
 
--- Modifier requête SQL pour "Jéjé Touréparé" (technicien Login:TONTON pwd:TONTON)
+-- Modifier requête SQL pour "Jeanne Tounické" (technicien Login:TUTU pwd:TUTU)
 UPDATE t_d_user
 SET Id_UserType=4
 WHERE Login='TUTU';
 
+-- Modifier requête SQL pour "Gonzales Roberto" (client Login:JOJO pwd:JOJO)
+UPDATE t_d_client
+SET Id_User=18
+WHERE Id_Client=4;

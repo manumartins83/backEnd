@@ -81,13 +81,13 @@
                     $use = $stmt->fetch(PDO::FETCH_ASSOC);
                 ?>
                     <div>
-                        <a href="deconnexion.php"><img class="styleDeconnexion" src="img/deconnexion.png" alt="Deconnexion"></a>
+                        <a href="deconnexion.php" title="Se déconnecter"><img class="styleDeconnexion" src="img/deconnexion.png" alt="Deconnexion"></a>
                     </div>
                     <!-- <p><a href="deconnexion.php">Se déconnecter</a></p> -->
                 <?php else : ?>
                     <div>
-                        <a href="login.php"><img class="styleLogin" src="img/login.png" alt="Login"></a>
-                        <a href="inscription.php"><img class="styleInscription" src="img/inscription.png" alt="Inscription"></a>
+                        <a href="login.php" title="Se connecter"><img class="styleLogin" src="img/login.png" alt="Login"></a>
+                        <a href="inscription.php" title="S'inscrire"><img class="styleInscription" src="img/inscription.png" alt="Inscription"></a>
                     </div>
                     <!-- <p><a href="login.php">Se connecter</a> ou <a href="inscription.php">s'inscrire</a></p> -->
                 <?php endif; ?>
@@ -101,7 +101,7 @@
                 </div> -->
 
                 <div>
-                    <a href="panier.php"><img class="stylePanier" src="img/panier.png" alt="Panier"></a>
+                    <a href="panier.php" title="Panier"><img class="stylePanier" src="img/panier.png" alt="Panier"></a>
                 </div>
             </div>
 

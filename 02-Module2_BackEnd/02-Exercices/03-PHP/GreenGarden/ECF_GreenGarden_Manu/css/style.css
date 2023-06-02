@@ -240,10 +240,11 @@
     height: auto;
 }
 
-/* ########## Mise en forme page ajout produits ########## */
+/* ########## Mise en forme formulaire pages ########## */
 .stylePageAjoutProduit,
 .stylePageAjoutTicket,
-.stylePageAfficheTicket {
+.stylePageAfficheTicket,
+.stylePageModifTicket {
     /* affichage block */
     display: flex;
     /* déplacement block */
@@ -254,10 +255,11 @@
     align-items: flex-start;
 }
 
-/* ########## Mise en forme label produit ########## */
+/* ########## Mise en forme label formulaire pages ########## */
 .styleLabelAjoutProduit,
 .styleLabelAjoutTicket,
-.styleLabelAfficheTicket {
+.styleLabelAfficheTicket,
+.styleLabelModifTicket {
     /* marge intérieure */
     margin: 20px;
     /* affichage block */
@@ -270,12 +272,13 @@
     align-items: flex-start;
 }
 
-/* ########## Mise en forme saisie produit ########## */
+/* ########## Mise en forme saisie formulaire pages ########## */
 .styleInputAjoutProduit,
 .styleSelectAjoutProduit,
 .styleInputAjoutTicket,
 .styleSelectAjoutTicket,
-.styleSelectAfficheTicket {
+.styleSelectAfficheTicket,
+.styleSelectModifTicket {
     /* marge intérieure */
     margin: 15px;
     /* affichage block */
@@ -288,10 +291,11 @@
     align-items: flex-start;
 }
 
-/* ########## Mise en forme page bouton ajout produit ########## */
+/* ########## Mise en forme générale bouton formulaire pages ########## */
 .styleBtnPageAjoutProduit,
 .styleBtnPageAjoutTicket,
-.styleBtnPageAfficheTicket {
+.styleBtnPageAfficheTicket,
+.styleBtnPageModifTicket {
     /* marge intérieure */
     margin: 0px 0px 15px;
     /* affichage block */
@@ -304,10 +308,11 @@
     align-items: center;
 }
 
-/* ########## Mise en forme bouton ajout produit ########## */
+/* ########## Mise en forme bouton formulaire pages ########## */
 .styleBtnAjoutProduit,
 .styleBtnAjoutTicket,
-.styleBtnAfficheTicket {
+.styleBtnAfficheTicket,
+.styleBtnModifTicket {
     /* affichage block */
     display: flex;
     /* déplacement block */
