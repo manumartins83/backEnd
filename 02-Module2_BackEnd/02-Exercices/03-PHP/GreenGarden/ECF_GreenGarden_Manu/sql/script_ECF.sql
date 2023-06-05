@@ -114,4 +114,3 @@ WHERE Login='TONTON';
 UPDATE t_d_user
 SET Id_UserType=4
 WHERE Login='TUTU';
-
