@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 01 juin 2023 à 16:48
+-- Généré le : ven. 02 juin 2023 à 13:02
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -471,8 +471,11 @@ CREATE TABLE `t_d_ticketsav` (
 
 INSERT INTO `t_d_ticketsav` (`Id_Ticket_SAV`, `Num_Ticket_SAV`, `Date_Ticket_SAV`, `Statut_Ticket_SAV`, `Id_Technicien_SAV`, `Id_Commande`, `Id_Retour`) VALUES
 (1, 'TIC0000001', '2023-04-03 08:32:05', 'suivi', 1, 3, 2),
-(2, 'TIC0000002', '2023-05-07 10:25:08', 'résolu', 2, 4, 5),
-(42, 'TIC0000003', '2023-06-01 15:41:22', 'crée', 1, 4, 4);
+(2, 'TIC0000002', '2023-05-07 10:25:08', 'resolu', 2, 4, 5),
+(42, 'TIC0000003', '2023-06-01 15:41:22', 'crée', 1, 4, 4),
+(43, 'TIC0000004', '2023-06-02 09:37:02', 'crée', 1, 4, 2),
+(44, 'TIC0000005', '2023-06-02 09:37:35', 'resolu', 1, 5, 5),
+(45, 'TIC0000006', '2023-06-02 12:14:47', 'suivi', 1, 2, 6);
 
 --
 -- Déclencheurs `t_d_ticketsav`
@@ -847,7 +850,7 @@ ALTER TABLE `t_d_techniciensav`
 -- AUTO_INCREMENT pour la table `t_d_ticketsav`
 --
 ALTER TABLE `t_d_ticketsav`
-  MODIFY `Id_Ticket_SAV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `Id_Ticket_SAV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT pour la table `t_d_typeretour`
