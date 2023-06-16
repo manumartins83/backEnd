@@ -40,19 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statut_ticket_retour = $_POST['statut_ticket'];
     $Id_ticket = $_POST['ticketId'];
 
-<<<<<<< HEAD
     $tickets_retour = $pdo->query("SELECT * FROM t_d_ticketsav")->fetch(PDO::FETCH_ASSOC);
 
     // insérer le ticket dans la base de données
     $stmt = $pdo->prepare("UPDATE t_d_ticketsav SET Statut_Ticket_SAV=:statutTicket WHERE Id_Ticket_SAV=:idTicket");
     $stmt->bindValue(':statutTicket', $statut_ticket_retour);
     $stmt->bindValue(':idTicket', $tickets_retour['Id_Ticket_SAV']);
-=======
+
     // requête de modification du statut ticket dans base de données
     $stmt = $pdo->prepare("UPDATE t_d_ticketsav SET Statut_Ticket_SAV=:statutTicket WHERE Id_Ticket_SAV=:idTicket");
     $stmt->bindValue(':statutTicket', $statut_ticket_retour);
     $stmt->bindValue(':idTicket', $Id_ticket);
->>>>>>> cf63e177944f042a79ff88eb60e888c7484ebe86
     $stmt->execute();
 }
 ?>
@@ -119,10 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>';
             echo "</div>";
         }
-<<<<<<< HEAD
         // $stmt->closeCursor(); //vide mémoire
-=======
->>>>>>> cf63e177944f042a79ff88eb60e888c7484ebe86
     }
     ?>
 
