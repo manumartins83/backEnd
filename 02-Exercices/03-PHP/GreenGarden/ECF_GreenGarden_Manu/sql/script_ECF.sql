@@ -115,13 +115,9 @@ WHERE Login='TONTON';
 -- Modifier requête SQL pour "Jeanne Tounické" (technicien Login:TUTU pwd:TUTU)
 UPDATE t_d_user
 SET Id_UserType=4
-<<<<<<< HEAD
-WHERE Login='TUTU';
-=======
 WHERE Login='TUTU';
 
 -- Modifier requête SQL pour "Gonzales Roberto" (client Login:JOJO pwd:JOJO)
 UPDATE t_d_client
 SET Id_User=18
 WHERE Id_Client=4;
->>>>>>> cf63e177944f042a79ff88eb60e888c7484ebe86
