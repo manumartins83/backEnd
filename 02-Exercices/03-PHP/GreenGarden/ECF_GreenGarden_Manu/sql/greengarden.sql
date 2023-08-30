@@ -110,7 +110,7 @@ INSERT INTO `t_d_categorie` (`Id_Categorie`, `Libelle`, `Id_Categorie_Parent`) V
 (9, 'Fleur', 6),
 (10, 'Pot', NULL),
 (11, 'Luminaire Solaire', NULL),
-(12, 'Tuyau d\'arrosage', NULL),
+(12, "Tuyau d'arrosage", NULL),
 (21, 'Béton', NULL),
 (22, 'Bois', NULL),
 (23, 'terrasse', 22);
