@@ -49,10 +49,11 @@ CREATE TABLE IF NOT EXIST Chien(
 
 /* création table */
 CREATE TABLE IF NOT EXIST PARTICIPER(
-   identifiant_chien VARCHAR(50) PRIMARY KEY AUTO_INCREMENT,
+   identifiant_chien_concours INT PRIMARY KEY AUTO_INCREMENT,
+   classement_chien INT NOT NULL,
 
-   fk_identifiant_concours VARCHAR(50),
-   fk_classement_chien INT NOT NULL,
+   fk_identifiant_chien VARCHAR(50) NOT NULL,
+   fk_identifiant_concours VARCHAR(50) NOT NULL,
    FOREIGN KEY(fk_identifiant_chien) REFERENCES Chien(identifiant_chien),
    FOREIGN KEY(fk_identifiant_concours) REFERENCES Concours(identifiant_concours)
 )ENGINE=INNODB;
