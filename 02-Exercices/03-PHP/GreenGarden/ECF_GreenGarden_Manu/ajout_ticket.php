@@ -1,63 +1,63 @@
 <?php
-// verification démarrage session connexion
+// si la session de connexion n'est pas démarrée alors
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+    session_start(); /* démarrage session */
 }
 
-// redirection vers page "Login" si utilisateur pas logué
+// si l'utilisateur n'est pas connecté alors
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: login.php');
-    exit;
+    header('Location: login.php'); /* redirige vers la page de connexion */
+    exit(); /* quitte la vérification */
 }
 
-// création variables récupération des infos utilisateur dans base de donnée
-$host = "localhost"; // Nom d'hôte de la base de données
-$user = "root"; // Nom d'utilisateur de la base de données
-$password_db = ""; // Mot de passe de la base de données
-$dbname = "greengarden"; // Nom de la base de données
+// création des variables d'environnement d'accès à la base de données
+$host = "localhost"; /* nom du service de la bdd */
+$user = "root"; /* nom d'utilisateur de la bdd */
+$password_db = ""; /* mdp de la bdd */
+$dbname = "greengarden"; /* nom de la bdd */
 
-// appel de la base de données
+// si connection OK alors
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password_db);
-    // configuration d'affichage des erreurs de la base de données
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password_db); /* connection à la bdd */
+}
+// sinon
+catch (PDOException $e) {
+    echo "Connection failed " . $e->getMessage(); /* message d'erreur */
 }
 
-// création variable connexion Id utilisateur
-$user_id = $_SESSION['user_id'];
+// création de la variable de session
+$user_id = $_SESSION['user_id']; /* de l'utilisateur correspondant */
 
-// requête de récupération Id utilisateur connecté dans base de données
-$stmt = $pdo->prepare("SELECT * FROM t_d_techniciensav WHERE Id_User=:useid");
-$stmt->bindValue(':useid', $user_id);
-$stmt->execute();
-$technicien = $stmt->fetch(PDO::FETCH_ASSOC);
+// requête de récupération du technicien connecté dans la bdd
+$stmt = $pdo->prepare("SELECT * FROM t_d_techniciensav WHERE Id_User=:useid"); /* requête sélection */
+$stmt->bindValue(':useid', $user_id); /* met en place l'utilisateur de la session */
+$stmt->execute(); /* exécute la requête */
+$technicien = $stmt->fetch(PDO::FETCH_ASSOC); /* renvoi la réponse à la requête */
 
-// requête de récupération des données bons de commande dans base de données
-$bons_cde = $pdo->query("SELECT * FROM t_d_commande")->fetchAll();
-// requête de récupération des données tickets dans base de données
-$tickets_retour = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll();
-// requête de récupération des données type de ticket dans base de données
-$types_retour = $pdo->query("SELECT * FROM t_d_typeretour")->fetchAll();
+// requête de récupération des bons de commande dans la bdd
+$bons_cde = $pdo->query("SELECT * FROM t_d_commande")->fetchAll(); /* requête sélection */
+// requête de récupération des tickets SAV dans la bdd
+$tickets_retour = $pdo->query("SELECT * FROM t_d_ticketsav")->fetchAll(); /* requête sélection */
+// requête de récupération du statut de retour des tickets SAV dans la bdd
+$types_retour = $pdo->query("SELECT * FROM t_d_typeretour")->fetchAll(); /* requête sélection */
 
-// si validation du formulaire dans structure HTML
+// si post du formulaire OK
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // récupération des infos du formulaire de la structure HTML
-    $cde_id = $_POST['num_bon_cde'];
-    $type_retour_id = $_POST['cause_retour'];
-    $today = date("Y-m-d H:i:s");
+    // création des variables de récupération du formulaire
+    $cde_id = $_POST['num_bon_cde']; /* numéro bon commande */
+    $type_retour_id = $_POST['cause_retour']; /* statut retour du ticket */
+    $today = date("Y-m-d H:i:s"); /* date et heure création */
 
-    // requête d'insertion d'un ticket dans base de données
-    $stmt = $pdo->prepare("INSERT INTO t_d_ticketsav (Date_Ticket_SAV, Statut_Ticket_SAV, 
+    // requête d'insertion d'un ticket retour dans la bdd
+    $stmt = $pdo->prepare("INSERT INTO t_d_ticketsav (Date_Ticket_SAV, Statut_Ticket_SAV, /* requête d'insertion */
     Id_Technicien_SAV, Id_Commande, Id_Retour) 	
-    VALUES (:dateTicket, :statutTicket, :technicien, :cde, :retour)");
-    $stmt->bindValue(':dateTicket', $today);
-    $stmt->bindValue(':statutTicket', 'crée');
-    $stmt->bindValue(':technicien', $technicien['Id_Technicien_SAV']);
-    $stmt->bindValue(':cde', $cde_id);
-    $stmt->bindValue(':retour', $type_retour_id);
-    $stmt->execute();
+    VALUES (:dateTicket, :statutTicket, :technicien, :cde, :retour)"); /* valeurs ajoutées */
+    $stmt->bindValue(':dateTicket', $today); /* met en place la date */
+    $stmt->bindValue(':statutTicket', 'crée'); /* met en place "crée" */
+    $stmt->bindValue(':technicien', $technicien['Id_Technicien_SAV']); /* met en place le technicien de la requête */
+    $stmt->bindValue(':cde', $cde_id); /* met en place le num bon cde posté */
+    $stmt->bindValue(':retour', $type_retour_id); /* met en place le statut ticket posté */
+    $stmt->execute(); /* exécute la requête */
 }
 ?>
 
@@ -80,25 +80,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- affichage formulaire de création ticket-->
     <form class="stylePageAjoutTicket" method="post">
+
         <div>
             <label class="styleLabelAjoutTicket" for="num_bon_cde">Numéro bon commande :</label>
             <label class="styleLabelAjoutTicket" for="statut_ticket">Statut ticket retour :</label>
         </div>
 
         <div>
+
             <select class="styleSelectAjoutTicket" name="num_bon_cde">
-                <?php foreach ($bons_cde as $bon_cde) {  // pour chaque données de la table bons de commande de la base de données ?>
-                    <option value="<?= $bon_cde['Id_Commande'] ?>"><?= $bon_cde['Num_Commande'] // affichage de la liste des bons dans select ?></option>
+                <?php foreach ($bons_cde as $bon_cde) {  // pour chaque données de la table bons de commande de la base de données 
+                ?>
+                    <option value="<?= $bon_cde['Id_Commande'] ?>"><?= $bon_cde['Num_Commande'] // affichage de la liste des bons dans select 
+                                                                    ?></option>
                 <?php } ?>
             </select>
+
             <select class="styleSelectAjoutTicket" name="cause_retour">
-                <?php foreach ($types_retour as $type_retour) { // pour chaque données de la table type de retour ticket de la base de données ?>
-                    <option value="<?= $type_retour['Id_Retour'] ?>"><?= $type_retour['Libelle_Retour'] // affichage de la liste du type de retour dans select ?></option>
+                <?php foreach ($types_retour as $type_retour) { // pour chaque données de la table type de retour ticket de la base de données 
+                ?>
+                    <option value="<?= $type_retour['Id_Retour'] ?>"><?= $type_retour['Libelle_Retour'] // affichage de la liste du type de retour dans select 
+                                                                        ?></option>
                 <?php } ?><br>
             </select>
+
             <div class="styleBtnPageAjoutTicket">
                 <input class="styleBtnAjoutTicket" type="submit" value="Créer ticket">
             </div>
+
         </div>
     </form>
 

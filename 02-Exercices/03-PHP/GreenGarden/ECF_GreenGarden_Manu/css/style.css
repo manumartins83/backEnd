@@ -243,6 +243,7 @@
 /* ########## Mise en forme formulaire pages ########## */
 .stylePageAjoutProduit,
 .stylePageAjoutTicket,
+.stylePageLogin,
 .stylePageAfficheTicket,
 .stylePageModifTicket {
     /* affichage block */
@@ -258,6 +259,7 @@
 /* ########## Mise en forme label formulaire pages ########## */
 .styleLabelAjoutProduit,
 .styleLabelAjoutTicket,
+.styleLabelLogin,
 .styleLabelAfficheTicket,
 .styleLabelModifTicket {
     /* marge intérieure */
@@ -276,6 +278,7 @@
 .styleInputAjoutProduit,
 .styleSelectAjoutProduit,
 .styleInputAjoutTicket,
+.styleInputLogin,
 .styleSelectAjoutTicket,
 .styleSelectAfficheTicket,
 .styleSelectModifTicket {
@@ -294,6 +297,7 @@
 /* ########## Mise en forme générale bouton formulaire pages ########## */
 .styleBtnPageAjoutProduit,
 .styleBtnPageAjoutTicket,
+.styleBtnPageLogin,
 .styleBtnPageAfficheTicket,
 .styleBtnPageModifTicket {
     /* marge intérieure */
@@ -311,6 +315,7 @@
 /* ########## Mise en forme bouton formulaire pages ########## */
 .styleBtnAjoutProduit,
 .styleBtnAjoutTicket,
+.styleBtnLogin,
 .styleBtnAfficheTicket,
 .styleBtnModifTicket {
     /* affichage block */
